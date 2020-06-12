@@ -1,0 +1,224 @@
+
+import plotly.graph_objects as go
+import math
+
+# %% [markdown]
+# # Risk assessment for infectious disease transmission in a microenvironment
+# There is a risk of infectious disease transmission within indoor environments. Infectious diseases may be transmitted through multiple mechanisms including touch, bodily fluids, formites, respiritory droplets (spew or aerosol). This risk assessment tool considers transmission within an indoor microenvironment through respiritory droplets, such as may occur in the transmission of Covid-19.
+# 
+# The factors  affect the number of people who might be infected include:
+# * the emission rate of the infected individual
+# * the ventilation of the indoor environment
+# * the inhilation rate of susceptible individuals
+# * the separation distance between infected and susceptible individuals
+# * the duration that infectious and susceptible people are in the environment.
+# 
+# The criteria for assessing the risk are set out below, along with a charting tool to visually represent the risk.
+
+# %%
+# This risk assessment is for the following microenvironment
+environmet_name = 'Lounge (Four people, one hour, Outdoor)'
+
+# %% [markdown]
+# ## Base case assumptions
+# Shopping in a small/mid sized supermarket is used as the base case assumption against which other risk are measured. This scenario is chosen as the attack rate (percentage of susceptible person who become infected when an infectious person visits the same environment) is low and is a common enough situation that most people can relate to it.
+# 
+# From microenvironment modelling the attack rate for a supermarket with mechanical ventilation is 0.31%. Note that this is not the probability of becoming infected. To determine that the prbability of infection, the attack rate needs to be multiplied by the probability of an infectious person visiting the same supermarket in the same time frame - a function of background prevalence rate and probability that an infectous person will visit the supermarket.
+# * Exhalation rate: Standing, no mask
+# * Ventilation: Length (30m) x width (20m) x heaight (3m), Air Change Per Hour (1.1)
+# * Distance: 60 customers at any one time
+# * Inhalation rate: standing, no mask
+# * Time: 30 minutes
+# %% [markdown]
+# ## Exhalation rate
+# 
+# Respiritory droplets are emitted from an infectuous person as they breath. Empidemiologists use the term quanta to measure the amount of virus transmitted. One quanta is the amount of virus required to infect a person. This measure, whilst abstract, is used to estimate the amount of virus exhaled by an infectuous person, transported through the environment, then inhaled by a susceptible person. 
+# 
+# The emission rate, is depdenent upon the amount of virus load present within the persons respiritory system, and the volume of air emitted with each breath. Viral load can vary over the infectuous period. The amount used in the risk assessment assumes an asymptomatic person. An average quanta emission rate is calculated across three activities.
+# 
+# The amount of exhaled virus may be reduced if the infectuous person wears a face mask. A reudction in quanta emitted is selectable, including no mask (baseline), cloth mask (home made), surgical mask and N95 mask.
+# 
+
+# %%
+# Quanta emission rate for SARS-Cov-2 infected asymptomatic subjects
+activity = {'resting': 98.1, 'standing':147, 'light exercise':317}
+# Reduction in quanta emission due to face coverings
+reduction_mask = {'none':0, 'cloth':0.2, 'surgical':0.5, 'N95':0.95}
+# Base risk for the risk assessment
+base_risk_exhalation = activity['standing'] * (1 - reduction_mask['none'])
+# Calculation risk for current environemnt
+# *************** Select options below ****************************#
+exhalation_risk = activity['standing'] * (1 - reduction_mask['none']) / base_risk_exhalation
+#******************************************************************#
+#Print Results
+print(f"Exhalation risk: {exhalation_risk:0.2f}")
+
+# %% [markdown]
+# ## Ventilation
+# Within an indoor environment, aerosolised virus particles will accumulate in the air over a period of time until removed. Virus particles may be removed either by falling to the floor due to gravity or air exchange with the outside environment. Virus particles can remain suspended in the air for hours, and it is assumed that the primary mode for removing particles from the environment is ventilation. 
+# 
+# Ventilation may be natural or mechanical. Natural ventilation is the natural flow of air between the inside and outside environments resulting from openings in the buildings structure (e.g. doors, windows, ventilation slots). Building regulations aimed at improving thermal efficiency of housing reduces the amount of natural ventilation; this may increase the risk of that infectious particles build up in the environment. Mechanical ventilation uses machinery to exchange air within the buildng. This may be required in environments where there are large numbers of people, heat generating equipment, air-borne pollutants, etc.
+# 
+# The concentration of virus particles will be slower in larger buildings with greater air volume, though these spaces may have larger numbers of susceptible people who could become infected.
+# 
+# Ideally, all spaces should be large and well ventilated to minimise the build up of aerosolised particles.
+# 
+# Note: Outdoor spaces may be considered indoor spaces when there are temperature inversions (e.g. above crowds) which trap aerosols at or near ground level, and when there is little background air movement to disperse any aerosol.
+# 
+# Air exchange rates (Air Changes Per Hour - ACH) can vary significantly depending upon the age of the property, property design, maintenance and presence of mechanical ventilation. Guidline air exchange rates for the risk assessment (see (https://www.vent-axia.com/sites/default/files/Ventilation%20Design%20Guidelines%202.pdf) for a more extensive list). Note that these are guidelines for effective ventilation many properties will diverge from these values and will have worse or better ventilation which will have a significant impact on infection rates.
+# * Natural ventilation (no windows, doors open): 0.3 (Building regulation recommend 0.3 l/s/m^2 which is 0.3 ACH but can be higher if doors and windows open, increasing to 0.5 or more depending on external wind blowing air through)
+# * Natural ventilation (windows/door, one side): 0.67
+# * Natural ventilation (windows/doors two side): 1.0
+# * Offices: 8 (range 6-10)
+# * Restaurants: 10 (range 8-12)
+# * Cafes and coffee bars: 11 (range 10-12)
+# * Gymnasium: 6 (minimum)
+# * Pubs: 12 (minimum)
+# * Schoolrooms: 6 (range 5-7)
+# * Shops and supermarkets: 11 (range 8-15)
+# * Conference rooms: 10 (range 8-12)
+
+# %%
+# ********* INPUT DATA ***********
+# Environment dimensions (meters)
+length = 40
+width = 40
+height = 3
+# Air Exchange Rate
+aer = 10.0
+# ********************************
+
+ventilation = 1 / (length * width * height * aer)
+
+# Base Line measurements
+base_length = 30
+base_width = 20
+base_height = 3
+base_aer = 1.1
+base = 1 / (base_length * base_width * base_height * base_aer)
+
+ventilation_risk = ventilation / base
+print(f'Ventilation risk: {ventilation_risk:.2f}')
+
+# %% [markdown]
+# ## Distance
+# The risk of infectious disease transmission increases the closer a susceptible peron is to an infected person. The calculation of this risk for all situations in a specific situation as it depends on the airflow between the infected and susceptible person. For instance the susceptible person's body heat might be sufficient to generate an updraft which pushes infectious particles above their head; an infectious person talking loudly, without a mask, might generate a plume of spew which travels several meters in still air; and, someone wearing a mask might cause particles to be emitted sideways rather than straight ahead. Even within a building, the arrangement of ventilation, heating, obstacles and natural airflow may case particles to move in unpredictable directions and over significant distances.
+# 
+# The model assumes that people are equally distributed over the surface area of the microenvironment, and that the air is well enough mixed that the risk of inhalation of an infectious particle is equal for all people at all times. Therefore, the number of potential people infected is related to the density of people within the microenvironment at any one time (other paramters in the risk assessment showing the impact of other factors on the risk of people being infected)
+
+# %%
+# ************ INPUT DATA ***********
+number_of_people_in_environment = 4
+# ***********************************
+
+# distance is square root of density, 85% as circles are not efficiently packed into squares.
+distance = math.sqrt((length * width) / number_of_people_in_environment  * 0.75) 
+
+base_number_of_people_in_environment = 60
+base_distance = math.sqrt((base_length * base_width) /base_number_of_people_in_environment * 0.75) 
+
+distance_risk = base_distance / distance
+print(f'Distance risk: {distance_risk:.2f}, distance:{distance:.2f}, base_distance:{base_distance:.2f}')
+
+# %% [markdown]
+# ## Inhalation rate
+# Inhalation by susceptible people is the reverse of exhalation by infected people. The risk of infection is driven by the inhalation rate (m3 h-1) as modified by any face coverings. With the exception of clinical personal protective equipment the impact of face coverings is considered low. Note, the model excludes risk associated with infection resulting from deposition of infectious droplets on non respiritory mucosal surfaces (e.g. eye).
+# 
+# |    Activity      | Inhalation rate  (m3 h-1)     |
+# |:--------------:  |:-------------------------:    |
+# |     Resting      |            0.36               |
+# |    Standing      |            0.54               |
+# | Light Exercise   |            1.16               |
+
+# %%
+# Quanta emission rate for SARS-Cov-2 infected asymptomatic subjects
+activity = {'resting': 0.36, 'standing':0.54, 'light exercise':1.16}
+# Reduction in quanta emission due to face coverings
+reduction_mask = {'none':0, 'cloth':0.2, 'surgical':0.5, 'N95':0.95}
+# Base risk for the risk assessment
+base_risk_inhalation = activity['standing'] * (1 - reduction_mask['none'])
+# Calculation risk for current environemnt
+# *************** Select options below *************************#
+inhalation_risk = activity['standing'] * (1-reduction_mask['none']) / base_risk_inhalation
+#***************************************************************#
+#Print Results
+print(f"Inhalation risk: {inhalation_risk:0.2f}")
+
+# %% [markdown]
+# ## Time
+# The final component of the risk assessment is time, both the amount of time that infectious and susceptible people spend in the environment. The longer the infecious person is in the environment, the greater the concentration build up of infectious material. The longer the susceptible person is in the environment the more chance they have of becoming infected. If the susceptible person arrives some time after the infectious person has left then quanta concentrations will have reduced due to the diluting effect of ventilation.
+# 
+# The baseline time assumes that infectious and susceptible people are in the microenvironment at the same time and for an amount of time that would create an X% risk of the susceptible person becoming infected.
+# 
+
+# %%
+# ***************************
+exposure_time = 60 # minutes
+# ***************************
+
+exposure_time_base = 30 # minutes - the number of minutes in the base environment to achieve a X% risk of infection
+
+exposure_time_risk = exposure_time / exposure_time_base
+print(f'Time risk: {exposure_time_risk:.2f}')
+
+# %% [markdown]
+# ## Calculations
+
+# %%
+def risk_assessment_chart(r, chart_title):
+
+    categories = [key for key, item in r.items()]
+    data = [item for key, item in r.items()]
+
+    fig = go.Figure()
+    
+    fig.add_trace(go.Scatterpolar(
+        r=data,
+        theta=categories,
+        fill='toself'
+    ))
+
+    
+    fig.update_layout(
+        showlegend=False,
+        title=chart_title,
+        font={
+            'size':18
+        },
+        polar={
+            'radialaxis':{
+                'type':'linear',
+                'visible':True,
+                'range':[0,2.2],
+                'angle':90,
+                'tickangle':90,
+                'tickfont':{
+                    'size':12
+                },
+                'tickmode':'array',
+                'tickvals':[0, .1, 1, 2],
+                'ticktext':['', 'Low', 'Medium', 'High']
+            },
+            'angularaxis':{ 
+                'direction':'clockwise'
+            }
+        }
+    )
+
+    return fig
+
+
+# %%
+r={ 'Time':math.log2(1 + exposure_time_risk),
+    'Exhalation':math.log2(1 + exhalation_risk),
+    'Ventilation':math.log2(1 + ventilation_risk),
+    'Distance':math.log2(1 + distance_risk),   
+    'Inhalation':math.log2(1 + inhalation_risk)}
+
+chart = risk_assessment_chart(r, environmet_name)
+chart.show("notebook")
+
+
+# %%
+
+

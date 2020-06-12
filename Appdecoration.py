@@ -14,7 +14,7 @@ class Appdecoration:
         """Provide a banner at the top of the page"""       
         return html.Div([
             html.Img(src=logo, width=200, height=60, style={'float':'right', 'vertical-align':'middle'}),
-            html.H1('Enrionvment risk assessment', style={'position':'relative', 'margin':'10px'})
+            html.H1('Environment risk assessment', style={'position':'relative', 'margin':'10px'})
             ], style={
                 'position':'fixed',
                 'width': '100%',

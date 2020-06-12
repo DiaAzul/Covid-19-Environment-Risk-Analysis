@@ -12,8 +12,6 @@ from Appdecoration import Appdecoration as ad
 app = dash.Dash(__name__)
 logo = app.get_asset_url('logo.png')
 
-print(f"logo:{logo}")
-
 app.layout = html.Div([
     # Outer block for header & footer
 

@@ -19,6 +19,7 @@ class Appcontrols:
                             {'label':'standing', 'value':147},
                             {'label':'light exercise', 'value':317}
                     ],
+                    id='dd_exhalation_rate',
                     value=98.1,
                     style = ({'width':'200px'})
                 )

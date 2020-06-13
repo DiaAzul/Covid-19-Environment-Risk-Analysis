@@ -10,34 +10,18 @@ class Appgraph:
     """This class produces graphs for display based upon inputs received.
     Methods should be defined as staticMethods.
     """   
-
-    # @staticmethod
-    # def inline_graph():
-    #     return dcc.Graph(
-    #             id='example-graph',
-    #             figure={
-    #                 'data': [
-    #                     {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-    #                     {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-    #                 ],
-    #                 'layout': {
-    #                     'title': 'Dash Data Visualization'
-    #                 }
-    #             }
-    #         )
-
     @staticmethod
-    def inline_graph():
+    def inline_graph(ex_rate):
         return dcc.Graph(
                 id='example-graph',
-                figure=Appgraph.parameterless_call()
+                figure=Appgraph.parameterless_call(ex_rate)
             )
 
 
     @staticmethod
-    def parameterless_call():
+    def parameterless_call(ex_rate):
         r={ 'Time':math.log2(1 + .5),
-            'Exhalation':math.log2(1 + .5),
+            'Exhalation':math.log2(1 + ex_rate/147),
             'Ventilation':math.log2(1 + .5),
             'Distance':math.log2(1 + .5),   
             'Inhalation':math.log2(1 + .5)}

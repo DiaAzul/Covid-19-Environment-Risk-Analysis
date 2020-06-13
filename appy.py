@@ -2,7 +2,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import logging
+from dash.dependencies import Input, Output
 
 from Apptext import Apptext as at
 from Appcontrols import Appcontrols as ac
@@ -53,9 +53,10 @@ app.layout = html.Div([
                             'word-wrap':'break-word',
                             'vertical-align':'top'}
                     ),
-                    html.Td([
-                        ag.inline_graph()
-                    ], style={ 'width': '50%',
+                    html.Td(
+                        #[html.Div(id='inline-chart')],
+                        id='inline-chart',
+                        style={ 'width': '50%',
                             'vertical-align': 'top'}
                     )
                 ])
@@ -69,6 +70,13 @@ app.layout = html.Div([
     ad.page_footer()
 ])
 
+# Define callbacks
+@app.callback(
+    Output(component_id='inline-chart', component_property='children'),
+    [Input(component_id='dd_exhalation_rate', component_property='value')]
+)
+def update_chart(input_value):
+    return ag.inline_graph(input_value)
 
 if __name__ == '__main__':
     app.run_server(debug=True)

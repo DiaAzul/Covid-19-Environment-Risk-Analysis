@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import dash
-import dash_core_components as dcc
+# import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
@@ -16,8 +16,9 @@ app.layout = html.Div([
     # Outer block for header & footer
 
     ad.page_header(logo),
-    #Inset Div spacer so that top of scrollnig text not hidden behind title bar
-    html.Div(style={'height':'60px'}),
+    # Inset Div spacer so that top of scrollnig text not hidden behind
+    # title bar
+    html.Div(style={'height': '60px'}),
 
     html.Div([
 
@@ -26,8 +27,8 @@ app.layout = html.Div([
 
         html.Div(
             at.introduction_text(),
-            style={'columns' : '400px 3',
-                    'column-rule-color': 'lightblue'}
+            style={'columns': '400px 3',
+                   'column-rule-color': 'lightblue'}
         ),
 
         html.Hr(),
@@ -49,19 +50,18 @@ app.layout = html.Div([
                         at.inhalation_rate_text(),
                         at.time_heading(),
                         at.time_text()
-                    ], style={'width':'50%',
-                            'word-wrap':'break-word',
-                            'vertical-align':'top'}
+                    ], style={'width': '50%',
+                              'word-wrap': 'break-word',
+                              'vertical-align': 'top'}
                     ),
                     html.Td(
-                        #[html.Div(id='inline-chart')],
                         id='inline-chart',
-                        style={ 'width': '50%',
-                            'vertical-align': 'top'}
+                        style={'width': '50%',
+                               'vertical-align': 'top'}
                     )
                 ])
             ),
-        style={'table-layout':'fixed','width': '100%'}
+            style={'table-layout': 'fixed', 'width': '100%'}
         )
 
     ], style={'margin': '10px'}
@@ -70,6 +70,7 @@ app.layout = html.Div([
     ad.page_footer()
 ])
 
+
 # Define callbacks
 @app.callback(
     Output(component_id='inline-chart', component_property='children'),
@@ -77,6 +78,7 @@ app.layout = html.Div([
 )
 def update_chart(input_value):
     return ag.inline_graph(input_value)
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

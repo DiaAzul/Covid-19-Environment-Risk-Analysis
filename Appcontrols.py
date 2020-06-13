@@ -1,8 +1,8 @@
 """ The Appcontrols file contains user input controls to modify the chart"""
 
-import dash
+# import dash
 import dash_core_components as dcc
-import dash_html_components as html
+# import dash_html_components as html
 
 
 class Appcontrols:
@@ -15,11 +15,11 @@ class Appcontrols:
     def exhalation_rate():
         return dcc.Dropdown(
                     options=[
-                            {'label':'resting', 'value':98.1},
-                            {'label':'standing', 'value':147},
-                            {'label':'light exercise', 'value':317}
+                            {'label': 'resting', 'value': 98.1},
+                            {'label': 'standing', 'value': 147},
+                            {'label': 'light exercise', 'value': 317}
                     ],
                     id='dd_exhalation_rate',
                     value=98.1,
-                    style = ({'width':'200px'})
+                    style=({'width': '200px'})
                 )

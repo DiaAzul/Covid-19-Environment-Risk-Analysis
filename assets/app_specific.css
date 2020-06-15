@@ -65,6 +65,7 @@
     border-color: gainsboro;
 }
 
+/* Controls to display the chart either inline or side-by-side where display space permits. */
 
 @media (min-width: 600px) {
     .flexbox-wrapper {
@@ -114,8 +115,9 @@
 .control-wrapper {
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-between;
     align-items: center;
-    margin:10px 0px 10px 0px;
+    margin: 10px 0px 10px 0px;
     padding: 5px 5px 5px 5px;
     border-color: black;
     border-width: 1px;
@@ -123,17 +125,31 @@
     background-color: aliceblue;
 }
 
-.control-wrapper > .control-dropdown {
-    flex: 1 0 200px;
-    order: 2;
-    margin:0px 10px 0px 10px;
-    z-index: 1001;
-  
+.control-wrapper >.control-description {
+    flex: 1 1 auto;
+    order: 1;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: auto;
 }
 
-.control-wrapper >.control-description {
-    flex: 0 1 auto;
-    order: 1;
-    margin:0px 10px 0px 10px;
+.control-wrapper > .control-dropdown {
+    flex: 0 0 200px;
+    order: 2;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 10px;
+    /* Increase z-index so that dropbox displays above text when in expanded position */
+    z-index: 1001;
+}
+
+.control-wrapper > .control-number {
+    flex: 0 0 200px;
+    order: 2;
+    align-items: center;
+    margin-left: 20px;
+    /* Increase z-index so that dropbox displays above text when in expanded position */
+    z-index: 1001;
+  
 }
 

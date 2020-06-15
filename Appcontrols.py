@@ -24,7 +24,8 @@ class Appcontrols:
         # Python equivalen of case statement is implemented using dictionary
         # of functions. This calls control function by type of control.
         self.control_selector = {
-            'dropdown': self.control_dropdown
+            'dropdown': self.control_dropdown,
+            'number': self.control_number
         }
 
     def control(self, control_id):
@@ -56,7 +57,7 @@ class Appcontrols:
         Returns:
             str: Html code for configured dropdown
         """
-        options = control.get('options', None)
+        options = control.get('options')
         dropdown_list = []
         for _, value in options.items():
             dropdown_list.append(value)
@@ -72,4 +73,23 @@ class Appcontrols:
                         className='control-dropdown'
                         )
 
-    # TODO: Add control for values (with max and min range - None)
+    def control_number(self, control):
+
+        options = control.get('options')
+        minimum = options.get('minimum')
+        maximum = options.get('maximum')
+
+        default_value = control.get('default')
+
+        return html.Div(dcc.Input(
+                        id=control.get('id'),
+                        type='number',
+                        inputMode='numeric',
+                        min=minimum,
+                        max=maximum,
+                        placeholder=default_value,
+                        value=default_value,
+                        debounce=True
+                        ),
+                        className='control-number'
+                        )

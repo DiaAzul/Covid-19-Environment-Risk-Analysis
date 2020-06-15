@@ -1,10 +1,15 @@
 """ The Appcontrols file contains user input controls to modify the chart"""
 
-import dash
+# import dash
 import dash_core_components as dcc
+<<<<<<< HEAD
 import dash_html_components as html
 import yaml
 import itertools
+=======
+# import dash_html_components as html
+
+>>>>>>> 9b7f1466b96f73f2d890152c59bb8c2c762512c7
 
 class Appcontrols:
     """This class contains controls used within the app to adjust
@@ -39,6 +44,7 @@ class Appcontrols:
         for _, value in options.items():
             dropdown_list.append(value)
 
+<<<<<<< HEAD
         return html.Div(dcc.Dropdown(
                         options=dropdown_list,
                         # options=[
@@ -52,3 +58,17 @@ class Appcontrols:
                     className='control-dropdown'
         )
     
+=======
+    @staticmethod
+    def exhalation_rate():
+        return dcc.Dropdown(
+                    options=[
+                            {'label': 'resting', 'value': 98.1},
+                            {'label': 'standing', 'value': 147},
+                            {'label': 'light exercise', 'value': 317}
+                    ],
+                    id='dd_exhalation_rate',
+                    value=98.1,
+                    style=({'width': '200px'})
+                )
+>>>>>>> 9b7f1466b96f73f2d890152c59bb8c2c762512c7

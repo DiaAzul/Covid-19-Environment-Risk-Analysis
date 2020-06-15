@@ -1,0 +1,6 @@
+name: DASH-ENV
+channels:
+  - defaults
+dependencies:
+  - dash=1.4.1=py_0
+  - flake8=3.8.2=py_0

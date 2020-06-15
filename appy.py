@@ -15,7 +15,7 @@ app = dash.Dash(__name__)
 logo = app.get_asset_url('logo.png')
 
 # Import content for text fields
-cwd = os.getcwd()
+cwd = os.path.dirname(os.path.abspath(__file__))
 at = Apptext(f"{cwd}/config/content.yml")
 # Import the configuration of the controls
 ac = Appcontrols(f"{cwd}/config/controls.yml")

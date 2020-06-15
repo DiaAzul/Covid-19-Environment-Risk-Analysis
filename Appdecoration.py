@@ -13,28 +13,19 @@ class Appdecoration:
     def page_header(logo):
         """Provide a banner at the top of the page"""       
         return html.Div([
-            html.Img(src=logo, width=200, height=60, style={'float':'right', 'vertical-align':'middle'}),
-            html.H1('Environment risk assessment', style={'position':'relative', 'margin':'10px'})
-            ], style={
-                'position':'fixed',
-                'width': '100%',
-                'top': '0',
-                'left': '0',
-                # Set z-index above plotly objects which are at 1001-1002
-                'z-index': '1005',
-                'background-color': 'gainsboro'}
+            html.Img(src=logo, width=200, height=60, className='logo'),
+            html.H1('Environment risk assessment', className='header-title')
+            ],
+            className='header'
             )
 
     @staticmethod
     def page_footer():
         """Provide a banner at the top of the page"""  
         return html.Div([
-            dcc.Markdown("""** Copyright 2020 Tanzo Creative Ltd **""", style={'float':'right', 'position':'relative', 'margin':'10px'})
-            ], style={
-                'background-color': 'gainsboro',
-                #'vertical-align': 'middle',
-                #'text-align':'right',
-                'height':'40px'}
+            dcc.Markdown("""** Copyright 2020 Tanzo Creative Ltd **""", className='copyright')
+            ],
+            className='footer'
             )
 
 

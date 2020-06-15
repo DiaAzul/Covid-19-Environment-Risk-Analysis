@@ -13,7 +13,7 @@ class Appgraph:
     @staticmethod
     def inline_graph(ex_rate):
         return dcc.Graph(
-                id='example-graph',
+                id='environment-risk-assessment-graph',
                 figure=Appgraph.parameterless_call(ex_rate)
             )
 
@@ -45,6 +45,7 @@ class Appgraph:
 
         fig.update_layout(
             showlegend=False,
+            paper_bgcolor ='#FFF8DC', # Cornsilk
             title={
                 'text':chart_title,
                 'x':0.5,

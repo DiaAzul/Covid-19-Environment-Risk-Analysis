@@ -1,0 +1,19 @@
+# Configuration file for controls in the model
+
+exhalation-rate:
+  id: ctrl-exhalation-rate
+  description: |
+      Activity determines the rate at which quanta is emitted by the person. Select the activity rate for the majority of people.
+  type: dropdown
+  options:
+    option1:
+      label: Resting
+      value: 98.1
+    option2:
+      label: Standing
+      value: 147
+    option3:
+      label: Light exercise
+      value: 317
+  default: option2
+

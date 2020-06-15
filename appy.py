@@ -4,13 +4,17 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
-from Apptext import Apptext as at
-from Appcontrols import Appcontrols as ac
+
+from Apptext import Apptext # as at
+from Appcontrols import Appcontrols
 from Appgraph import Appgraph as ag
 from Appdecoration import Appdecoration as ad
 
 app = dash.Dash(__name__)
 logo = app.get_asset_url('logo.png')
+
+at = Apptext('./config/content.yml')
+ac = Appcontrols('./config/controls.yml')
 
 app.layout = html.Div([
     # Outer block for header & footer
@@ -19,53 +23,40 @@ app.layout = html.Div([
     #Inset Div spacer so that top of scrollnig text not hidden behind title bar
     html.Div(style={'height':'60px'}),
 
+    # Everything between header and footer
     html.Div([
-
+        
+        # Introduction text
+        html.Div([
         at.introduction_heading(),
+        at.introduction_text(),
+        html.Hr(className='introduction-break-after'),
+        ], className='introduction-wrapper'),
 
-
-        html.Div(
-            at.introduction_text(),
-            style={'columns' : '400px 3',
-                    'column-rule-color': 'lightblue'}
-        ),
-
-        html.Hr(),
-
-        html.Table(
-            html.Tbody(
-                html.Tr([
-                    html.Td([
-                        at.base_case_assumptions_heading(),
-                        at.base_case_assumptions_text(),
-                        at.exhalation_rate_heading(),
-                        ac.exhalation_rate(),
-                        at.exhalation_rate_text(),
-                        at.ventilation_heading(),
-                        at.ventilation_text(),
-                        at.distance_heading(),
-                        at.distance_text(),
-                        at.inhalation_rate_heading(),
-                        at.inhalation_rate_text(),
-                        at.time_heading(),
-                        at.time_text()
-                    ], style={'width':'50%',
-                            'word-wrap':'break-word',
-                            'vertical-align':'top'}
-                    ),
-                    html.Td(
-                        #[html.Div(id='inline-chart')],
-                        id='inline-chart',
-                        style={ 'width': '50%',
-                            'vertical-align': 'top'}
-                    )
-                ])
-            ),
-        style={'table-layout':'fixed','width': '100%'}
+        # Main scollable contenxt (controls and graph)
+        html.Div([
+            html.Div(id='inline-chart', className='graph-container'),
+            html.Div([
+                at.heading('base_case_assumptions'),
+                at.text('base_case_assumptions'),
+                at.heading('exhalation'),
+                ac.control('exhalation-rate'),
+                at.text('exhalation'),
+                at.heading('ventilation'),
+                at.text('ventilation'),
+                at.heading('distance'),
+                at.text('distance'),
+                at.heading('inhalation'),
+                at.text('inhalation'),
+                at.heading('time'),
+                at.text('time')
+            ], 
+            className='text-container',
+            )
+        ], 
+        className='flexbox-wrapper',       
         )
-
-    ], style={'margin': '10px'}
-    ),
+    ]),
 
     ad.page_footer()
 ])
@@ -73,7 +64,7 @@ app.layout = html.Div([
 # Define callbacks
 @app.callback(
     Output(component_id='inline-chart', component_property='children'),
-    [Input(component_id='dd_exhalation_rate', component_property='value')]
+    [Input(component_id='ctrl-exhalation-rate', component_property='value')]
 )
 def update_chart(input_value):
     return ag.inline_graph(input_value)

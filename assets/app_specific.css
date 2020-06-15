@@ -1,0 +1,139 @@
+/*  The following css is specific to this application 
+    It is intended to set the layout for the application 
+*/
+
+/*  Content container sets the overall structure for the content
+    we want to keep the graph on top where possible and at the top
+    of the page. 
+*/
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    /* Set z-index above dash and ploytly objects which have z in range 1001-1002 */
+    z-index: 1005;
+    background-color: gainsboro;
+    }
+
+.footer {
+    height: 40px;
+    background-color: gainsboro;
+}
+
+.logo{
+    vertical-align: right;
+    float: right;
+    margin: 10px;
+}
+
+
+.header-title {
+    position: relative;
+    margin: 10px;
+}
+
+
+.copyright {
+    position: relative;
+    float: right;
+    margin: 10px;
+}
+
+.introduction-wrapper {
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.introduction-text {
+        columns: 400px 3;
+        column-rule-color: 'lightblue';
+    }
+
+.introduction-break-after {
+    display: block;
+    margin-top: 1.0em;
+    margin-bottom: 2.0em;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+    border-color: gainsboro;
+}
+
+
+@media (min-width: 600px) {
+    .flexbox-wrapper {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-start;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .flexbox-wrapper > .graph-container {
+        order: 1;
+        flex: 1 0 600px;
+        align-self: flex-start;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .flexbox-wrapper {
+        display: flex;
+        flex-flow: row;
+        align-items: flex-start;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .flexbox-wrapper >.graph-container {
+        order: 3;
+        flex: 1 0 600px;
+        position: sticky;
+        align-self: flex-start;
+        top: 60px;
+        margin-left: 30px;
+        margin-right: 10px;
+    }
+}
+
+.flexbox-wrapper > .text-container {
+    order: 2;
+    word-wrap: break-word;
+}
+
+/* Define styling for controls */
+
+.control-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin:10px 0px 10px 0px;
+    padding: 5px 5px 5px 5px;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 10px;
+    background-color: aliceblue;
+}
+
+.control-wrapper > .control-dropdown {
+    flex: 1 0 200px;
+    order: 2;
+    margin:0px 10px 0px 10px;
+    z-index: 1001;
+  
+}
+
+.control-wrapper >.control-description {
+    flex: 0 1 auto;
+    order: 1;
+    margin:0px 10px 0px 10px;
+}
+

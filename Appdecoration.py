@@ -13,18 +13,21 @@ class Appdecoration:
     @staticmethod
     def page_header(logo):
         """Provide a banner at the top of the page"""
-        return html.Div([
+        return html.Div([html.Div([
             html.Img(src=logo, width=200, height=60, className='logo'),
             html.H1('Environment risk assessment', className='header-title')
             ],
             className='header'
-            )
+            ),
+            html.Div(style={'height': '60px'})
+            ])
 
     @staticmethod
     def page_footer():
         """Provide a banner at the top of the page"""
         return html.Div([
-            dcc.Markdown("""** Copyright 2020 Tanzo Creative Ltd **""", className='copyright')
+            dcc.Markdown("""** Copyright 2020 Tanzo Creative Ltd **""",
+                        className='copyright')
             ],
             className='footer'
             )

@@ -4,7 +4,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
 import yaml
-import itertools
+
 
 class Appcontrols:
     """This class contains controls used within the app to adjust
@@ -20,7 +20,6 @@ class Appcontrols:
         with open(path) as file:
             self.controls = yaml.load(file, Loader=yaml.FullLoader)
 
-
     def control(self, control_id):
         control = self.controls.get(control_id, None)
         # Create a DIV with className option box and type flex -> Row
@@ -28,10 +27,10 @@ class Appcontrols:
         # Add control as flexbox 2 with control (call as function returned)
 
         return html.Div([
-            dcc.Markdown(control.get('description', 'Select an option'), className='control-description'),
+            dcc.Markdown(control.get('description', 'Select an option'),
+                        className='control-description'),
             self.dropdown_box(control)
         ], className='control-wrapper')
-
 
     def dropdown_box(self, control):
         options = control.get('options', None)
@@ -43,7 +42,6 @@ class Appcontrols:
                         options=dropdown_list,
                         id=control.get('id'),
                         value=98.1,
-                    ),
-                    className='control-dropdown'
-        )
-    
+                        ),
+                        className='control-dropdown'
+                        )

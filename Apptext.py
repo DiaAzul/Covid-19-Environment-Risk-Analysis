@@ -15,20 +15,17 @@ class Apptext:
         with open(path) as file:
             self.content = yaml.load(file, Loader=yaml.FullLoader)
 
-
     def introduction_heading(self):
         header_text = self.content.get('introduction').get('heading')
         return html.H3(header_text)
 
-
     def introduction_text(self):
-        return dcc.Markdown(self.content.get('introduction').get('text'), className='introduction-text')
-
+        return dcc.Markdown(self.content.get('introduction').get('text'),
+                            className='introduction-text')
 
     def heading(self, section_id):
         return html.H3(self.content.get(section_id).get('heading'))
 
-
     def text(self, section_id):
-        return dcc.Markdown(self.content.get(section_id).get('text'), className='app-text-body')
-    
+        return dcc.Markdown(self.content.get(section_id).get('text'),
+                            className='app-text-body')

@@ -13,28 +13,25 @@ from Appdecoration import Appdecoration as ad
 app = dash.Dash(__name__)
 logo = app.get_asset_url('logo.png')
 
+# Import content for text fields
 at = Apptext('./config/content.yml')
+# Import the configuration of the controls
 ac = Appcontrols('./config/controls.yml')
 
 app.layout = html.Div([
-    # Outer block for header & footer
 
     ad.page_header(logo),
-    # Inset Div spacer so that top of scrollnig text not hidden behind
-    # title bar
-    html.Div(style={'height': '60px'}),
 
-    # Everything between header and footer
     html.Div([
-        
+
         # Introduction text
         html.Div([
-        at.introduction_heading(),
-        at.introduction_text(),
-        html.Hr(className='introduction-break-after'),
-        ], className='introduction-wrapper'),
+            at.introduction_heading(),
+            at.introduction_text(),
+            html.Hr(className='introduction-break-after'),
+            ], className='introduction-wrapper'),
 
-        # Main scollable contenxt (controls and graph)
+        # Main scrollable contenxt (controls and graph)
         html.Div([
             html.Div(id='inline-chart', className='graph-container'),
             html.Div([
@@ -51,11 +48,11 @@ app.layout = html.Div([
                 at.text('inhalation'),
                 at.heading('time'),
                 at.text('time')
-            ], 
-            className='text-container',
+            ],
+                className='text-container',
             )
-        ], 
-        className='flexbox-wrapper',       
+        ],
+            className='flexbox-wrapper',
         )
     ]),
 

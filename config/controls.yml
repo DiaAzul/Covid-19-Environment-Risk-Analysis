@@ -1,5 +1,48 @@
 # Configuration file for controls in the model
 
+# Specify the size of the microenvironment
+room-length:
+  id: ctrl-room-length
+  description: |
+      The length of the room in meters.
+  type: number
+  options:
+    minimum: 1
+    maximum: None
+  default: 10.0
+
+room-width:
+  id: ctrl-room-width
+  description: |
+      The width of the room in meters.
+  type: number
+  options:
+    minimum: 1
+    maximum: None
+  default: 5.0
+
+room-height:
+  id: ctrl-room-height
+  description: |
+      The height of the room in meters. A residential room will typically have a ceiling height of 2.7-3.0 meters.
+  type: number
+  options:
+    minimum: 1
+    maximum: None
+  default: 2.7
+
+# Ventilation rates for the building
+ventilation-aer:
+  id: ctrl-ventilation-aer
+  description: |
+      The Air Exchange Rate (AER) of the room. A room with natural ventilation typically has an AER in the range 0.2 - 0.4 per hour.
+  type: number
+  options:
+    minimum: 0.1
+    maximum: None
+  default: 0.3
+
+ # Controls for exhalation rate
 exhalation-rate:
   id: ctrl-exhalation-rate
   description: |
@@ -16,4 +59,84 @@ exhalation-rate:
       label: Light exercise
       value: 317
   default: option2
+  
+exhalation-mask:
+  id: ctrl-exhalation-mask
+  description: |
+    Wearing a mask reduces the rate of quanta emission. Select whether the majority of people are wearing a mask.
+  type: dropdown
+  options:
+    option1:
+      label: No mask
+      value: 0.0
+    option2:
+      label: Cloth mask
+      value: 0.2
+    option3:
+      label: Surgical mask
+      value: 0.5
+  default: option1
+  
+# Occpancy determines the average distance between people
+average-occupancy:
+    id: ctrl-average-occupancy
+    description: |
+      The average occupancy of the room. The more people in a room the harder it will be to maintain physical distancing.
+    type: number
+    options:
+      minimum: 1
+      maximum: None
+    default: 5
 
+# Controls for inhalation rate
+inhalation-rate:
+  id: ctrl-inhalation-rate
+  description: |
+    Activity determines respiritory rate which determines how much air is breathed in per hour.
+  type: dropdown
+  options:
+    option1:
+      label: Resting
+      value: 0.36
+    option2:
+      label: Standing
+      value: 0.54
+    option3:
+      label: Light exercise
+      value: 1.16
+  default: option2
+  
+inhalation-mask:
+  id: ctrl-inhalation-mask
+  description: |
+    Wearing a mask may help to filter respiritory droplets from the air.
+  type: dropdown
+  options:
+    option1:
+      label: No mask
+      value: 0.0
+    option2:
+      label: Cloth mask
+      value: 0.2
+    option3:
+      label: Surgical mask
+      value: 0.5
+  default: option1
+
+# The time that a person is in the environment.
+time-in-environment:
+  id: ctrl-time-in-environment
+  description: |
+    The average amount of time people are in the environment in minutes.
+  type: number
+  options:
+    minimum: 1
+    maximum: None
+  default: 15
+  
+  
+  
+  
+  
+  
+  

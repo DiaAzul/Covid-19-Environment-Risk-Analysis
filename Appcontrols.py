@@ -7,9 +7,10 @@ import yaml
 
 
 class Appcontrols:
-    """This class contains controls used within the app to adjust
-    calculations and information shown on the chart.
-    Methods should be defined as staticMethods.
+    """Controls within the app are defined within a configuration file.
+    This file is loaded into this class at startup, which is then called by
+    the layout to return html code for each control object. The styling for
+    the control objects is defined within the app_specific css file.
     """
     def __init__(self, path):
         """Given the path to the config file load config into a directory
@@ -20,28 +21,55 @@ class Appcontrols:
         with open(path) as file:
             self.controls = yaml.load(file, Loader=yaml.FullLoader)
 
+        # Python equivalen of case statement is implemented using dictionary
+        # of functions. This calls control function by type of control.
+        self.control_selector = {
+            'dropdown': self.control_dropdown
+        }
+
     def control(self, control_id):
+        """Returns html for a control with description
+
+        Args:
+            control_id (str): ID of the control within the YAML file.
+
+        Returns:
+            str: Html code for the control
+        """
         control = self.controls.get(control_id, None)
-        # Create a DIV with className option box and type flex -> Row
-        # Add Markdown as flexbox 1 with introductory text
-        # Add control as flexbox 2 with control (call as function returned)
+
+        type = control.get('type')
+        get_control_html = self.control_selector.get(type)
 
         return html.Div([
             dcc.Markdown(control.get('description', 'Select an option'),
                         className='control-description'),
-            self.dropdown_box(control)
+            get_control_html(control)
         ], className='control-wrapper')
 
-    def dropdown_box(self, control):
+    def control_dropdown(self, control):
+        """Returns html code for a control
+
+        Args:
+            control (dict): Control object for a dropdown list
+
+        Returns:
+            str: Html code for configured dropdown
+        """
         options = control.get('options', None)
         dropdown_list = []
         for _, value in options.items():
             dropdown_list.append(value)
 
+        default_option = control.get('default')
+        default_value = options.get(default_option).get('value')
+
         return html.Div(dcc.Dropdown(
                         options=dropdown_list,
                         id=control.get('id'),
-                        value=98.1,
+                        value=default_value,
                         ),
                         className='control-dropdown'
                         )
+
+    # TODO: Add control for values (with max and min range - None)

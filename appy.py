@@ -3,6 +3,7 @@ import dash
 # import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import os
 
 
 from Apptext import Apptext
@@ -14,9 +15,10 @@ app = dash.Dash(__name__)
 logo = app.get_asset_url('logo.png')
 
 # Import content for text fields
-at = Apptext('./config/content.yml')
+cwd = os.getcwd()
+at = Apptext(f"{cwd}/config/content.yml")
 # Import the configuration of the controls
-ac = Appcontrols('./config/controls.yml')
+ac = Appcontrols(f"{cwd}/config/controls.yml")
 
 app.layout = html.Div([
 

@@ -5,7 +5,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 
-from Apptext import Apptext # as at
+from Apptext import Apptext
 from Appcontrols import Appcontrols
 from Appgraph import Appgraph as ag
 from Appdecoration import Appdecoration as ad

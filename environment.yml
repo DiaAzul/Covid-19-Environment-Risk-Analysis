@@ -4,3 +4,4 @@ channels:
 dependencies:
   - dash=1.4.1=py_0
   - flake8=3.8.2=py_0
+  - yaml=0.1.7=py_0

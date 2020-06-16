@@ -24,7 +24,9 @@ room-width:
 room-height:
   id: ctrl-room-height
   description: |
-      The height of the room in meters. A residential room will typically have a ceiling height of 2.7-3.0 meters.
+      The height of the room in meters.
+
+      *A residential room will typically have a ceiling height of 2.7-3.0 meters.*
   type: number
   options:
     minimum: 1

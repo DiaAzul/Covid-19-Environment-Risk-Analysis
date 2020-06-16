@@ -139,7 +139,12 @@
     align-items: center;
     margin-left: 20px;
     margin-right: 10px;
-    /* Increase z-index so that dropbox displays above text when in expanded position */
+}
+
+/*Ensure react menu drop down shows over subsequent items */
+.Select-menu-outer {
+    position: absolute;
+    overflow: auto;
     z-index: 1001;
 }
 

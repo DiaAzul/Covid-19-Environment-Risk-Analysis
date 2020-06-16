@@ -9,7 +9,7 @@ room-length:
   options:
     minimum: 1
     maximum: None
-  default: 10.0
+  default: 30.0
 
 room-width:
   id: ctrl-room-width
@@ -19,7 +19,7 @@ room-width:
   options:
     minimum: 1
     maximum: None
-  default: 5.0
+  default: 20.0
 
 room-height:
   id: ctrl-room-height
@@ -29,7 +29,7 @@ room-height:
   options:
     minimum: 1
     maximum: None
-  default: 2.7
+  default: 3.0
 
 # Ventilation rates for the building
 ventilation-aer:
@@ -40,7 +40,7 @@ ventilation-aer:
   options:
     minimum: 0.1
     maximum: None
-  default: 0.3
+  default: 1.1
 
  # Controls for exhalation rate
 exhalation-rate:
@@ -86,7 +86,7 @@ average-occupancy:
     options:
       minimum: 1
       maximum: None
-    default: 5
+    default: 60
 
 # Controls for inhalation rate
 inhalation-rate:
@@ -132,7 +132,7 @@ time-in-environment:
   options:
     minimum: 1
     maximum: None
-  default: 15
+  default: 30
   
   
   

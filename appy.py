@@ -16,6 +16,8 @@ logo = app.get_asset_url('logo.png')
 
 # Import content for text fields
 cwd = os.path.dirname(os.path.abspath(__file__))
+
+# TODO: use isfile to determine whether file exists (extended descriptions)
 at = Apptext(f"{cwd}/config/content.yml")
 # Import the configuration of the controls
 ac = Appcontrols(f"{cwd}/config/controls.yml")
@@ -71,13 +73,40 @@ app.layout = html.Div([
 ])
 
 
-# Define callbacks
+# To manage a long list of inputs, define the inputs as a list
+def get_list_of_inputs():
+    return ['ctrl-room-length',
+            'ctrl-room-width',
+            'ctrl-room-height',
+            'ctrl-ventilation-aer',
+            'ctrl-average-occupancy',
+            'ctrl-exhalation-mask',
+            'ctrl-exhalation-rate',
+            'ctrl-inhalation-mask',
+            'ctrl-inhalation-rate',
+            'ctrl-time-in-environment'
+            ]
+
+
+# Create a list of callbacks to use in the wrapper based on that list
+def get_list_of_input_callbacks():
+    ids = get_list_of_inputs()
+    callback_list = []
+    for id in ids:
+        callback_list.append(Input(component_id=id, component_property='value'))
+    return callback_list
+
+
+# Define the callback function then pack returned values from list into a dictionary
 @app.callback(
     Output(component_id='inline-chart', component_property='children'),
-    [Input(component_id='ctrl-exhalation-rate', component_property='value')]
-)
-def update_chart(input_value):
-    return ag.inline_graph(input_value)
+    get_list_of_input_callbacks())
+def update_chart(*args):
+    kwargs = {}
+    for index, id in enumerate(get_list_of_inputs()):
+        kwargs[id] = args[index]
+
+    return ag.inline_graph(**kwargs)
 
 
 if __name__ == '__main__':

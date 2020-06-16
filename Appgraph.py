@@ -12,10 +12,48 @@ class Appgraph:
     Methods should be defined as staticMethods.
     """
     @staticmethod
-    def inline_graph(ex_rate):
+    def inline_graph(**kwargs):
+
+        # Exhalation rate (base = Standing, no mask)
+        base_exhalation_rate = 147 * (1 - 0)
+        exhalation_rate = kwargs['ctrl-exhalation-rate'] * (1 - kwargs['ctrl-exhalation-mask'])
+        exhalation_risk = exhalation_rate / base_exhalation_rate
+
+        # Ventilation (base = 30m x 20m x 3m with AER:1.1)
+        base_ventiliaton_rate = 1 / (30 * 20 * 3 * 1.1)
+        ventilation_rate = 1 / (kwargs['ctrl-room-length'] *
+                                kwargs['ctrl-room-width'] *
+                                kwargs['ctrl-room-height'] *
+                                kwargs['ctrl-ventilation-aer'])
+        ventilation_risk = ventilation_rate / base_ventiliaton_rate
+
+        # Distance (base number of people in environment = 60, packing efficiency 75%)
+        base_distance = math.sqrt((30 * 20) / 60 * 0.75)
+        distance = math.sqrt((kwargs['ctrl-room-length'] * kwargs['ctrl-room-width']) /
+                             kwargs['ctrl-average-occupancy'] * 0.75)
+        distance_risk = 1 / (distance / base_distance)
+
+        # Inhalation rate (bse = Standing, no mask)
+        base_inhalation_rate = 0.54 * (1 - 0)
+        inhalation_rate = kwargs['ctrl-inhalation-rate'] * (1 - kwargs['ctrl-inhalation-mask'])
+        inhalation_risk = inhalation_rate / base_inhalation_rate
+
+        # Time (base time = 30 minutes)
+        base_exposure_time = 30
+        exposure_time = kwargs['ctrl-time-in-environment']
+        exposure_time_risk = exposure_time / base_exposure_time
+
+        r = {'Time': math.log2(1 + exposure_time_risk),
+             'Exhalation': math.log2(1 + exhalation_risk),
+             'Ventilation': math.log2(1 + ventilation_risk),
+             'Distance': math.log2(1 + distance_risk),
+             'Inhalation': math.log2(1 + inhalation_risk)}
+
+        fig = Appgraph.risk_assessment_chart(r, "Environment risk assessment")  # noqa:E501
+
         return dcc.Graph(
                 id='environment-risk-assessment-graph',
-                figure=Appgraph.parameterless_call(ex_rate)
+                figure=fig
             )
 
     @staticmethod
@@ -44,7 +82,7 @@ class Appgraph:
 
         fig.update_layout(
             showlegend=False,
-            paper_bgcolor ='#FFF8DC', # Cornsilk
+            paper_bgcolor='#FFF8DC',  # Cornsilk
             title={
                 'text': chart_title,
                 'x': 0.5,

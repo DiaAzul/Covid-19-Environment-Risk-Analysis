@@ -1,5 +1,5 @@
 # Text content for the application
-# This content will be read into the application at startup
+# This content is read into the application at startup
 # Each section is referenced with a key defined at column 0
 # Each section has a heading and text (Markdown)
 # Lines of markown should be indented two further spaces from the text key
@@ -9,39 +9,37 @@
 introduction:
   heading: 'Introduction'
   text: |
-    There is a risk of infectious disease transmission within indoor environments. Infectious diseases may be transmitted through multiple mechanisms including touch, bodily fluids, formites, respiritory droplets (spew or aerosol). This risk assessment tool considers transmission within an indoor microenvironment through respiritory droplets, such as may occur in the transmission of Covid-19.
+    Infectious diseases are transmitted in many ways, including through direct contact with an infected individual or indirectly through contact with their bodily fluids, fomites (particles of infectious material), and exhaled respiritory droplets. With each new infectious disease there is a period of time whilst research is carried out until it is clear which modes of tranmission are most dominant in transmitting the diseases from an infectious to a susceptible person.
+    
+    In the case of Covid-19 (caused by the SARS-Cov-2 virus), infection is thought to be transmitted in respiritory droplets, thought that doesn't mean that infection can be passed through other modes of transmission. There is debate whether transmission is predominantly due to spew, the large respiritory droplets which are ejected during breathing, sneezing and coughing; or whether infectious particles are also aerosolised. Spew droplets are typically greater than five to ten micrometers in size and fall close to the infectious person, whereas aerosols are much smaller and can travel great distances floating on air currents.
 
-    The factors  affect the number of people who might be infected include:
+    The extent to which respiritory droplets are aerosolised and whether they remain infectious is important, and determines whether additional mitigations are required. A disease which is predominantly transmitted in spew and where there is minimal aerosol generated is mitigated by recommending adequate physical distance between people, the wearing of face coverings, hand washing and making sure the environment is cleaned. However, if large numbers of respiritory particles are aerosolised and they remain in the air for long periods of time, travelling significant distances and creating clouds of concentrated infectious particles, then an increased number of people are likely to become infected. It should be noted that aerosolised infectious disease are not new and the health service has significant experience minimising risks associated with them.
 
-    * the emission rate of the infected individual
-    * the ventilation of the indoor environment
-    * the inhilation rate of susceptible individuals
-    * the separation distance between infected and susceptible individuals
-    * the duration that infectious and susceptible people are in the environment.
+    The purpose of this risk assessment tool is to help identify situations where infectious disease transmission through aerosol may be a significant risk, and where mitigations may need to be considered to reduce the risk of infection. It must be noted that whilst there is strong evidence that Covid-19 is transmitted as an aerosol, whether it is a greater risk than spew or other modes of transmission will take time to establish. Even if this tool identifies that that aerosol transmission is a risk, precautions will still need to be taken to minimise the risk of transmission due to spew and fomites by encouraging social distancing and hand washing.
 
-    The criteria for assessing the risk are set out below, along with a charting tool to visually represent the risk.
+    Whilst every effort was taken to ensure that the information contained in this tool is accurate and informative, it does not consitute professional advice. We would encourage anyone making decisions which may affect large numbers of people to seek futher advice.
 
 base_case_assumptions:
-  heading: 'Base case assumptions'
+  heading: 'Indoor micro-environment'
   text: |
-    Shopping in a small/mid sized supermarket is used as the base case assumption against which other risk are measured. This scenario is chosen as the attack rate (percentage of susceptible person who become infected when an infectious person visits the same environment) is low and is a common enough situation that most people can relate to it.
+    The risk assessment tool assumes that the greatest risk of infectious disease transmission due to aerosol is wihtin an indoor micro-environment. The model assumes that the environment can be represented by a cubic structure, and that the air is well mixed within the environment.
 
-    From microenvironment modelling the attack rate for a supermarket with mechanical ventilation is 0.31%. Note that this is not the probability of becoming infected. To determine that the prbability of infection, the attack rate needs to be multiplied by the probability of an infectious person visiting the same supermarket in the same time frame - a function of background prevalence rate and probability that an infectous person will visit the supermarket.
+    Well mixed has a number of implications relating to risk, most importantly that all susceptible people within the space have an equal risk of becoming infected and that there are no specific concentration hotspots which might increase the risk of infection. For small to medium sized environments (rooms) over a long enough period of time these assumptions should hold. However, in very large spaces (auditoriums), and where there are strong airflows (in the presence of powerful mechanical venitilation) an uneven distriubtion of the aerosol concentration within the environment is likely to have an impact on risk. Even within smaller spaces, the impact of funiture placement, ventilation and the movement of people may impact how the concentration of infectious material may accumulate.
 
-    * Exhalation rate: Standing, no mask
-    * Ventilation: Length (30m) x width (20m) x heaight (3m), Air Change Per Hour (1.1)
-    * Distance: 60 customers at any one time
-    * Inhalation rate: standing, no mask
-    * Time: 30 minutes
+    The risk assessment tool presents risk on a radar chart (displayed either above or to the right of this text). Risk is rated along five axes which are discussed in more detail below. Each axis shows the extent to which that factor is driving risk up (higher) or down (lower). The baseline medium risk is considered to be a small grocery store (small supermarket) with the following characteristics:
+    * Infectious person: Standing, no mask
+    * Environment size: Length (30m) x Width (20m) x Heaight (3m), 
+    * Ventilation: Mechanical ventilation (1.1 Air Changes per Hour)
+    * Physical distancing: 60 customers in the environment at any one time
+    * Susceptible people: Standing, no mask
+    * Average time a person is in the environment: 30 minutes
 
 exhalation:
   heading: Exhalation
   text: |
-    Respiritory droplets are emitted from an infectuous person as they breath. Empidemiologists use the term quanta to measure the amount of virus transmitted. One quanta is the amount of virus required to infect a person. This measure, whilst abstract, is used to estimate the amount of virus exhaled by an infectuous person, transported through the environment, then inhaled by a susceptible person.
+    Respiritory droplets are emitted from an infectious person as they breath. The emission rate, is depdenent upon the amount of virus load present within the persons respiritory system, and the volume of air emitted with each breath. Viral load can vary over the infectious period. The amount used in the risk assessment assumes an asymptomatic person. An average quanta emission rate is calculated across three activities.
 
-    The emission rate, is depdenent upon the amount of virus load present within the persons respiritory system, and the volume of air emitted with each breath. Viral load can vary over the infectuous period. The amount used in the risk assessment assumes an asymptomatic person. An average quanta emission rate is calculated across three activities.
-
-    The amount of exhaled virus may be reduced if the infectuous person wears a face mask. A reudction in quanta emitted is selectable, including no mask (baseline), cloth mask (home made), surgical mask and N95 mask.
+    The amount of exhaled virus may be reduced if the infectious person wears a face mask. A reudction in quanta emitted is selectable, including no mask (baseline), cloth mask (home made), surgical mask and N95 mask.
 
 ventilation:
   heading: 'Ventilation'
@@ -80,18 +78,9 @@ inhalation:
   text: |
     Inhalation by susceptible people is the reverse of exhalation by infected people. The risk of infection is driven by the inhalation rate (m3 h-1) as modified by any face coverings. With the exception of clinical personal protective equipment the impact of face coverings is considered low. Note, the model excludes risk associated with infection resulting from deposition of infectious droplets on non respiritory mucosal surfaces (e.g. eye).
 
-    |    Activity      | Inhalation rate  (m3 h-1)     |
-    |:--------------:  |:-------------------------:    |
-    |     Resting      |            0.36               |
-    |    Standing      |            0.54               |
-    | Light Exercise   |            1.16               |
-
 time:
   heading: 'Time'
   text:
     The final component of the risk assessment is time, both the amount of time that infectious and susceptible people spend in the environment. The longer the infecious person is in the environment, the greater the concentration build up of infectious material. The longer the susceptible person is in the environment the more chance they have of becoming infected. If the susceptible person arrives some time after the infectious person has left then quanta concentrations will have reduced due to the diluting effect of ventilation.
 
     The baseline time assumes that infectious and susceptible people are in the microenvironment at the same time and for an amount of time that would create an X% risk of the susceptible person becoming infected.
-
-
-

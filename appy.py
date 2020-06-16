@@ -17,8 +17,10 @@ logo = app.get_asset_url('logo.png')
 # Import content for text fields
 cwd = os.path.dirname(os.path.abspath(__file__))
 
-# TODO: use isfile to determine whether file exists (extended descriptions)
-at = Apptext(f"{cwd}/config/content.yml")
+if os.path.isfile(f"{cwd}/config/content-extended.yml"):
+    at = Apptext(f"{cwd}/config/content-extended.yml")
+else:
+    at = Apptext(f"{cwd}/config/content.yml")
 # Import the configuration of the controls
 ac = Appcontrols(f"{cwd}/config/controls.yml")
 

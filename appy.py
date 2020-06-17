@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import dash
-# import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import os
@@ -17,6 +16,7 @@ logo = app.get_asset_url('logo.png')
 # Import content for text fields
 cwd = os.path.dirname(os.path.abspath(__file__))
 
+# Option to include a file with extended content which overrides standard content
 if os.path.isfile(f"{cwd}/config/content-extended.yml"):
     at = Apptext(f"{cwd}/config/content-extended.yml")
 else:
@@ -37,7 +37,7 @@ app.layout = html.Div([
             html.Hr(className='introduction-break-after'),
             ], className='introduction-wrapper'),
 
-        # Main scrollable contenxt (controls and graph)
+        # Main scrollable content (controls and graph)
         html.Div([
             html.Div(id='inline-chart', className='graph-container'),
             html.Div([
@@ -107,8 +107,14 @@ def get_list_of_input_callbacks():
 @app.callback(
     Output(component_id='inline-chart', component_property='children'),
     get_list_of_input_callbacks())
+# The callback only provides a list of values with no id information, this is risky
+# as any changes in the code could shift values in the array which require multiple
+# code changes to keep things synchronised. Therefore, take the list of values and
+# transform into a dictionary with id:value pairs.
 def update_chart(*args):
     kwargs = {}
+    # Iterate over the list of inputs and create a dictionary to pass to the function
+    # which will perform processing and return an object to display.
     for index, id in enumerate(get_list_of_inputs()):
         kwargs[id] = args[index]
 

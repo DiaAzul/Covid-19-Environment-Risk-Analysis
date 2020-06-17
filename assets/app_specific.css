@@ -134,7 +134,7 @@
 }
 
 .control-wrapper > .control-dropdown {
-    flex: 0 0 200px;
+    flex: 0 0 210px;
     order: 2;
     align-items: center;
     margin-left: 20px;
@@ -153,8 +153,6 @@
     order: 2;
     align-items: center;
     margin-left: 20px;
-    /* Increase z-index so that dropbox displays above text when in expanded position */
-    z-index: 1001;
-  
+    margin-right: 0px;
 }
 

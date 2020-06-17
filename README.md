@@ -1,5 +1,7 @@
 # Covid-19 Environment Risk Analysis
 
+![Radar plot](./assets/example-plot.png)
+
 Infectious diseases are transmitted in many ways, including through direct contact with an infected individual or indirectly through contact with their bodily fluids, fomites (particles of infectious material), and exhaled respiritory droplets. With each new infectious disease there is a period of time whilst research is carried out until it is clear which modes of tranmission are most dominant in transmitting the diseases from an infectious to a susceptible person.
 
 In the case of Covid-19 (caused by the SARS-Cov-2 virus), infection is thought to be transmitted in respiritory droplets, thought that doesn't mean that infection can be passed through other modes of transmission. There is debate whether transmission is predominantly due to spew, the large respiritory droplets which are ejected during breathing, sneezing and coughing; or whether infectious particles are also aerosolised. Spew droplets are typically greater than five to ten micrometers in size and fall close to the infectious person, whereas aerosols are much smaller and can travel great distances floating on air currents.

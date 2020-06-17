@@ -4,7 +4,7 @@
 room-length:
   id: ctrl-room-length
   description: |
-      The length of the room in meters.
+    The length of the room in meters.
   type: number
   options:
     minimum: 1
@@ -14,7 +14,7 @@ room-length:
 room-width:
   id: ctrl-room-width
   description: |
-      The width of the room in meters.
+    The width of the room in meters.
   type: number
   options:
     minimum: 1
@@ -24,33 +24,83 @@ room-width:
 room-height:
   id: ctrl-room-height
   description: |
-      The height of the room in meters.
+    The height of the room in meters.
 
-      *A residential room will typically have a ceiling height of 2.7-3.0 meters.*
+    *A residential room will typically have a ceiling height of 2.7-3.0 meters.*
   type: number
   options:
     minimum: 1
     maximum: None
   default: 3.0
 
+# Building ventilation type
+ventilation-type:
+  id: ctrl-ventilation-type
+  description: |
+    For naturally ventilated rooms uses this to select whether doors and windows are closed or open. If the room is mechanically ventilated then select 'Mechanical' and choose a room type below. If the air exchange rate is known then select 'Enter value' and enter the AER in the box below.
+  type: dropdown
+  options:
+    option1:
+      label: Closed windows amd doors
+      value: 0.3
+    option2:
+      label: Open window
+      value: 0.5
+    option3:
+      label: Open windows and doors
+      value: 1.1
+    option4:
+      label: Mechanical
+      value: mechanical
+    option5:
+      label: Enter value
+      value: entered-value
+  default: option3
+
+# Ventilation rates for the building
+ventilation-building:
+  id: ctrl-ventilation-building
+  description: |
+    To use a typical mechanical ventilation Air Exchange Rate above and select a room type (select 'Mechanical' in the box above to use this option).
+  type: dropdown
+  options:
+    option1:
+      label: Home
+      value: 4.0
+    option2:
+      label: School room
+      value: 6.0
+    option3:
+      label: Office
+      value: 8.0
+    option4:
+      label: Restaurant or bar
+      value: 9.9
+    option5:
+      label: Conference room
+      value: 10.1
+    option6:
+      label: Shop or supermarket
+      value: 12
+  default: option3
+
 # Ventilation rates for the building
 ventilation-aer:
   id: ctrl-ventilation-aer
   description: |
-      The Air Exchange Rate per hour (AER) of the environment.
-
-      *A residential rooom will have an AER in the range 0.2-1.0*
+    Enter the Air Exchange Rate per hour for the room if know (select 'Enter value' in first ventilation box to use this value)
   type: number
   options:
     minimum: 0.1
     maximum: None
   default: 1.1
 
+
  # Controls for exhalation rate
 exhalation-rate:
   id: ctrl-exhalation-rate
   description: |
-      Level of activity for people in the environment.
+    Level of activity for people in the environment.
   type: dropdown
   options:
     option1:
@@ -84,18 +134,18 @@ exhalation-mask:
       value: 0.95
   default: option1
   
-# Occpancy determines the average distance between people
+# Occupancy determines the average distance between people
 average-occupancy:
-    id: ctrl-average-occupancy
-    description: |
-      The average occupancy of the environment. 
+  id: ctrl-average-occupancy
+  description: |
+    The average occupancy of the environment. 
 
-      *The more people in a room the harder it will be to maintain physical distancing.*
-    type: number
-    options:
-      minimum: 1
-      maximum: None
-    default: 60
+    *The more people in a room the harder it will be to maintain physical distancing.*
+  type: number
+  options:
+    minimum: 1
+    maximum: None
+  default: 60
 
 # Controls for inhalation rate
 inhalation-rate:
@@ -118,7 +168,7 @@ inhalation-rate:
 inhalation-mask:
   id: ctrl-inhalation-mask
   description: |
-    Wearing a face covering does reduce the risk of infection unless it is specfically designed to do so.
+    Wearing a face covering does reduce the risk of infection unless it is specifically designed to do so.
   type: dropdown
   options:
     option1:

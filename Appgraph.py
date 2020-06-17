@@ -19,12 +19,21 @@ class Appgraph:
         exhalation_rate = kwargs['ctrl-exhalation-rate'] * (1 - kwargs['ctrl-exhalation-mask'])
         exhalation_risk = exhalation_rate / base_exhalation_rate
 
+        # Determination of the AER rate is spread over two controls
+        # The first determines whether the building is naturally or mechanically ventilated
+        aer_natural = kwargs['ctrl-ventilation-type']
+
+        aer = kwargs['ctrl-ventilation-building'] if aer_natural == 'mechanical' else aer_natural
+
+        aer = kwargs['ctrl-ventilation-aer'] if aer_natural == 'entered-value' else aer
+
         # Ventilation (base = 30m x 20m x 3m with AER:1.1)
         base_ventiliaton_rate = 1 / (30 * 20 * 3 * 1.1)
         ventilation_rate = 1 / (kwargs['ctrl-room-length'] *
                                 kwargs['ctrl-room-width'] *
                                 kwargs['ctrl-room-height'] *
-                                kwargs['ctrl-ventilation-aer'])
+                                aer)
+                                #kwargs['ctrl-ventilation-aer'])
         ventilation_risk = ventilation_rate / base_ventiliaton_rate
 
         # Distance (base number of people in environment = 60, packing efficiency 75%)
@@ -49,7 +58,7 @@ class Appgraph:
              'Distance': math.log2(1 + distance_risk),
              'Inhalation': math.log2(1 + inhalation_risk)}
 
-        fig = Appgraph.risk_assessment_chart(r, "Environment risk assessment")  # noqa:E501
+        fig = Appgraph.risk_assessment_chart(r, "Environment risk assessment")
 
         return dcc.Graph(
                 id='environment-risk-assessment-graph',
@@ -64,7 +73,7 @@ class Appgraph:
              'Distance': math.log2(1 + .5),
              'Inhalation': math.log2(1 + .5)}
 
-        chart = Appgraph.risk_assessment_chart(r, "Environment risk assessment")  # noqa:E501
+        chart = Appgraph.risk_assessment_chart(r, "Environment risk assessment")
         return chart
 
     @staticmethod

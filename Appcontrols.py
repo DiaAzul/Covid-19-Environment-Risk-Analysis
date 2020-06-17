@@ -21,7 +21,7 @@ class Appcontrols:
         with open(path) as file:
             self.controls = yaml.load(file, Loader=yaml.FullLoader)
 
-        # Python equivalen of case statement is implemented using dictionary
+        # Python equivalent of case statement is implemented using dictionary
         # of functions. This calls control function by type of control.
         self.control_selector = {
             'dropdown': self.control_dropdown,
@@ -69,6 +69,7 @@ class Appcontrols:
                         options=dropdown_list,
                         id=control.get('id'),
                         value=default_value,
+                        clearable=False
                         ),
                         className='control-dropdown'
                         )

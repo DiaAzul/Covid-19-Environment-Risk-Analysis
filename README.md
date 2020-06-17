@@ -20,7 +20,11 @@ Dependencies for the project are:
 
 # Code overview
 The main code which defines the structure of the Dash app is contained within appy.py. This should be called from the WSGI server.
+
 The text content and controls for the app are defined separately, with text held in two yaml files content.yml for headings and text descriptions, and controls.yml to define the controls in the app. This facilitates rapid text changes without impacting the code. These files are read when the application starts by classes in apptext.py and appcontrols.py.
+
 The header and footer are defined within Appdecoration.py which is called from appy.py
+
 The radar graph and the calculations used to determine the risk assessment is included in Appgraph.py.
+
 All custom CSS used to style the app is included in app_specific.css within the assets folder.

@@ -1,4 +1,5 @@
 # Covid-19 Environment Risk Analysis
+![Radar plot](./assets/example-plot.png)
 
 Infectious diseases are transmitted in many ways, including through direct contact with an infected individual or indirectly through contact with their bodily fluids, fomites (particles of infectious material), and exhaled respiratory droplets. With each new infectious disease there is a period of time whilst research is carried out until it is clear which modes of transmission are most dominant in transmitting the diseases from an infectious to a susceptible person.
 

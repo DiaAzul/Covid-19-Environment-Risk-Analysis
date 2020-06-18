@@ -59,8 +59,16 @@ app.layout = html.Div([
                 ac.control('average-occupancy'),
                 at.text('distance'),
                 at.heading('inhalation'),
-                ac.control('inhalation-rate'),
-                ac.control('inhalation-mask'),
+                # Inhalation should match exhalation options, the original controls
+                # were replaced with display boxes so that inhalation always matches
+                # exhalation options. The original code is retained in case the option
+                # to have different settings is required. Additional changes are required
+                # in the callback function below, and Appgraph where the inhalation rate
+                # options are copied from the exhalation settings.
+                # ac.control('inhalation-rate'),
+                # ac.control('inhalation-mask'),
+                html.Div(id='inhalation-rateT', className='display-value-container'),
+                html.Div(id='inhalation-maskT', className='display-value-container'),
                 at.text('inhalation'),
                 at.heading('time'),
                 ac.control('time-in-environment'),
@@ -88,8 +96,8 @@ def get_list_of_inputs():
             'ctrl-average-occupancy',
             'ctrl-exhalation-mask',
             'ctrl-exhalation-rate',
-            'ctrl-inhalation-mask',
-            'ctrl-inhalation-rate',
+            # 'ctrl-inhalation-mask',
+            # 'ctrl-inhalation-rate',
             'ctrl-time-in-environment'
             ]
 
@@ -105,7 +113,9 @@ def get_list_of_input_callbacks():
 
 # Define the callback function then pack returned values from list into a dictionary
 @app.callback(
-    Output(component_id='inline-chart', component_property='children'),
+    [Output(component_id='inline-chart', component_property='children'),
+     Output(component_id='inhalation-rateT', component_property='children'),
+     Output(component_id='inhalation-maskT', component_property='children')],
     get_list_of_input_callbacks())
 # The callback only provides a list of values with no id information, this is risky
 # as any changes in the code could shift values in the array which require multiple
@@ -118,7 +128,9 @@ def update_chart(*args):
     for index, id in enumerate(get_list_of_inputs()):
         kwargs[id] = args[index]
 
-    return ag.inline_graph(**kwargs)
+    return (ag.inline_graph(ac, **kwargs),
+            ag.inhalation_rate(ac, **kwargs),
+            ag.inhalation_mask(ac, **kwargs))
 
 
 if __name__ == '__main__':

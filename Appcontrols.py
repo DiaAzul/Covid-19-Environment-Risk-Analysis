@@ -94,3 +94,19 @@ class Appcontrols:
                         ),
                         className='control-number'
                         )
+
+    def fetch_dropdown_label_value(self, id, id_match, match_value):
+        control = self.controls.get(id, None)
+        match_control = self.controls.get(id_match, None)
+        label = None
+        value = None
+
+        for _, match_option in match_control.get('options').items():
+            if match_option.get('value') == match_value:
+                label = match_option.get('label')
+                for _, option in control.get('options').items():
+                    if option.get('label') == label:
+                        value = option.get('value')
+                        break
+
+        return label, value

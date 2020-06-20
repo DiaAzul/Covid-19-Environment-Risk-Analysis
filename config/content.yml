@@ -33,7 +33,7 @@ base_case_assumptions:
     The risk assessment tool presents risk on a radar chart (displayed either above or to the right of this text). Risk is rated along five axes which are discussed in more detail below. Each axis shows the extent to which that factor is driving risk up (higher) or down (lower). The baseline medium risk is considered to be a small grocery store (small supermarket) with the following characteristics:
     * Infectious person: Standing, no mask
     * Environment size: Length (30m) x Width (20m) x Height (3m), 
-    * Ventilation: Mechanical ventilation (1.1 Air Changes per Hour)
+    * Ventilation: Natural ventilation (1.1 Air Changes per Hour)
     * Physical distancing: 60 customers in the environment at any one time
     * Susceptible people: Standing, no mask
     * Average time a person is in the environment: 30 minutes

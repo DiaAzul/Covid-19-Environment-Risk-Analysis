@@ -7,6 +7,20 @@
     of the page. 
 */
 
+/* Over-write default font-families */
+html {
+    font-size: 62.5%; }
+  body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;    
+    color: rgb(50, 50, 50); 
+}
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Proza Libre', sans-serif;
+    font-weight: 400; 
+}
+
 .header {
     position: fixed;
     width: 100%;

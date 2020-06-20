@@ -176,3 +176,8 @@
     font-family: inherit;
     font-size: inherit; /*https://stackoverflow.com/questions/6080413/why-doesnt-input-inherit-the-font-from-body*/
 }
+
+
+.gauge-chart {
+    height: 300px;
+}

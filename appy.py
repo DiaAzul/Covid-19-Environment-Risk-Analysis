@@ -129,8 +129,8 @@ def update_chart(*args):
         kwargs[id] = args[index]
 
     return (ag.inline_graph(ac, **kwargs),
-            ag.inhalation_rate(ac, **kwargs),
-            ag.inhalation_mask(ac, **kwargs))
+            ag.inline_value(ac, 'exhalation-rate', 'inhalation-rate', **kwargs),
+            ag.inline_value(ac, 'exhalation-mask', 'inhalation-mask', **kwargs))
 
 
 if __name__ == '__main__':

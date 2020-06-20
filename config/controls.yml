@@ -37,11 +37,11 @@ room-height:
 ventilation-type:
   id: ctrl-ventilation-type
   description: |
-    For naturally ventilated rooms uses this to select whether doors and windows are closed or open. If the room is mechanically ventilated then select 'Mechanical' and choose a room type below. If the air exchange rate is known then select 'Enter value' and enter the AER in the box below.
+    For naturally ventilated rooms uses this to select whether doors and windows are closed or open. If the room is mechanically ventilated then select 'Mechanical' and select a room type below. If the Air Exchange Rate is known then select 'Enter value' and enter the AER in the box below.
   type: dropdown
   options:
     option1:
-      label: Closed windows amd doors
+      label: Closed windows and doors
       value: 0.3
     option2:
       label: Open window
@@ -61,7 +61,7 @@ ventilation-type:
 ventilation-building:
   id: ctrl-ventilation-building
   description: |
-    To use a typical mechanical ventilation Air Exchange Rate above and select a room type (select 'Mechanical' in the box above to use this option).
+    To use a typical mechanical ventilation Air Exchange Rate select a room type **(select 'Mechanical' in the box above to use this option).**
   type: dropdown
   options:
     option1:
@@ -88,7 +88,7 @@ ventilation-building:
 ventilation-aer:
   id: ctrl-ventilation-aer
   description: |
-    Enter the Air Exchange Rate per hour for the room if know (select 'Enter value' in first ventilation box to use this value)
+    Enter the Air Exchange Rate per hour for the room if know **(select 'Enter value' in first ventilation box to use this value).**
   type: number
   options:
     minimum: 0.1
@@ -151,7 +151,7 @@ average-occupancy:
 inhalation-rate:
   id: ctrl-inhalation-rate
   description: |
-    Level of activity for people in the environment.
+    Assumption is the same as exhalation activity.
   type: dropdown
   options:
     option1:
@@ -168,7 +168,9 @@ inhalation-rate:
 inhalation-mask:
   id: ctrl-inhalation-mask
   description: |
-    Wearing a face covering does reduce the risk of infection unless it is specifically designed to do so.
+    Assumption the same as exhalation mask wearing.
+    
+    *Note: wearing a face covering will not reduce the risk of infection unless it is specifically designed to do so.*
   type: dropdown
   options:
     option1:
@@ -176,7 +178,7 @@ inhalation-mask:
       value: 0.0
     option2:
       label: Cloth mask
-      value: 0.2
+      value: 0.0
     option3:
       label: Surgical mask
       value: 0.5

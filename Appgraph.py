@@ -53,15 +53,13 @@ class Appgraph:
         # Ventilation base case
         base_volume = base['ctrl-room-length'] * base['ctrl-room-width'] * base['ctrl-room-height']
         base_v_scalar = (base['ctrl-average-occupancy'] / base_volume /
-                         base['ctrl-ventilation-aer'])  # *
-                         # base['ctrl-time-in-environment'] / 60)
+                         base['ctrl-ventilation-aer'])
         base_ventilation = base_v_scalar * (math.exp(-base['ctrl-ventilation-aer'] *
                                             base['ctrl-time-in-environment'] / 60))
 
         # Ventilation scenario
         volume = kwargs['ctrl-room-length'] * kwargs['ctrl-room-width'] * kwargs['ctrl-room-height']
-        v_scalar = (kwargs['ctrl-average-occupancy'] / volume / aer)  # *
-                    # kwargs['ctrl-time-in-environment'] / 60)
+        v_scalar = (kwargs['ctrl-average-occupancy'] / volume / aer)
         ventilation = v_scalar * (math.exp(-aer * kwargs['ctrl-time-in-environment'] / 60))
 
         ventilation_risk = ventilation / base_ventilation
@@ -128,6 +126,8 @@ class Appgraph:
             dcc.Graph(id='environment-risk-assessment-gauge',
                       figure=fig_gauge,
                       className='gauge-chart'),
+            dcc.Markdown(Appgraph.inline_risk_text(),
+                         className='inline-risk-text'),
             dcc.Graph(id='environment-risk-assessment-graph',
                       figure=fig_radar)
         ])
@@ -141,6 +141,10 @@ class Appgraph:
                                ((1 - Exp_AER) * v * AER / 60))
 
         return concentration_total / 2
+
+    @staticmethod
+    def inline_risk_text():
+        return """*Low risk*: the probability of onward transmission of infection is low. *Medium risk*: there is some probability that infection may be passed on if an infectious person enters the environment. *High risk*: there is high probability that infection will be passed to one or more people if an infected person enters the environment."""
 
     @staticmethod
     def inline_gauge_chart(reading, chart_title):
@@ -215,7 +219,6 @@ class Appgraph:
         fig.update_layout(layout)
 
         return fig
-    
 
     @staticmethod
     def pointer_coordinates(reading, min, max):

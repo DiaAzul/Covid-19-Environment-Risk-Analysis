@@ -79,6 +79,14 @@ html {
     border-color: gainsboro;
 }
 
+.inline-risk-text {
+    position: relative;
+    z-index: 1002;
+    font-size: 0.9em;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
 /* Controls to display the chart either inline or side-by-side where display space permits. */
 
 @media (min-width: 600px) {
@@ -191,7 +199,6 @@ html {
     font-size: inherit; /*https://stackoverflow.com/questions/6080413/why-doesnt-input-inherit-the-font-from-body*/
 }
 
-
 .gauge-chart {
-    height: 300px;
+    height: 270px;
 }

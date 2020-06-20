@@ -177,7 +177,7 @@ class Appgraph:
             'marker': {
                 'colors': colors,
                 'line': {
-                    'color': '#FFFFFF',
+                    'color': '#FBFBFF',
                     'width': 2
                 }
             }
@@ -186,7 +186,7 @@ class Appgraph:
         layout = {
             'showlegend': False,
             'paper_bgcolor': '#FBFBFF',
-            'height': 450,
+            'height': 470,
             'width': 600,
             'title': {
                 'text': chart_title,
@@ -241,7 +241,7 @@ class Appgraph:
         # Assumes that co-ordinate (0, 0) is the centre of the chart which is plotly (0.5, 0.5)
         # Angular zero degrees points directly left from centre point (backwards from usual)
         # TODO: Find a better way to correct for aspect ratio
-        x = 0.5 - r * math.cos(t) * 450 / 600
+        x = 0.5 - r * math.cos(t) * 470 / 600
         y = 0.5 + r * math.sin(t)
 
         return x, y

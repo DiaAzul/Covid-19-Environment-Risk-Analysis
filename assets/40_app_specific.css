@@ -89,7 +89,7 @@ html {
 
 /* Controls to display the chart either inline or side-by-side where display space permits. */
 
-@media (min-width: 600px) {
+@media (min-width: 0) {
     .flexbox-wrapper {
         display: flex;
         flex-flow: column;
@@ -98,12 +98,15 @@ html {
         margin-right: 10px;
     }
 
-    .flexbox-wrapper > .graph-container {
+    .graph-container {
         order: 1;
-        flex: 1 0 600px;
+        flex: 0 0 600px;
+        flex-basis: 600px;
+        max-width: 600px;
         align-self: flex-start;
         margin-left: 10px;
         margin-right: 10px;
+        background-color: #FBFBFF;
     }
 }
 
@@ -116,16 +119,29 @@ html {
         margin-right: 10px;
     }
 
-    .flexbox-wrapper >.graph-container {
+    .graph-container {
         order: 3;
-        flex: 1 0 600px;
+        flex: 0 0 600px;
+        flex-basis: 600px;
+        max-width: 600px;
         position: sticky;
         align-self: flex-start;
         top: 60px;
         margin-left: 30px;
         margin-right: 10px;
+        background-color: #FBFBFF;
     }
 }
+
+.gauge-chart {
+    height: 270px;
+}
+
+.inline-risk-text {
+    height: 90px;
+}
+
+
 
 .flexbox-wrapper > .text-container {
     order: 2;
@@ -197,8 +213,4 @@ html {
     box-sizing: border-box; 
     font-family: inherit;
     font-size: inherit; /*https://stackoverflow.com/questions/6080413/why-doesnt-input-inherit-the-font-from-body*/
-}
-
-.gauge-chart {
-    height: 270px;
 }

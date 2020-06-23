@@ -144,7 +144,11 @@ class Appgraph:
 
     @staticmethod
     def inline_risk_text():
-        return """*Low risk*: the probability of onward transmission of infection is low. *Medium risk*: there is some probability that infection may be passed on if an infectious person enters the environment. *High risk*: there is high probability that infection will be passed to one or more people if an infected person enters the environment."""
+        return """**Low risk**: the probability of onward transmission of infection is low.
+         **Medium risk**: there is some probability that infection may be passed on if an
+          infectious person enters the environment. **High risk**: there is high probability
+           that infection will be passed to one or more people if an infected person enters
+            the environment."""
 
     @staticmethod
     def inline_gauge_chart(reading, chart_title):

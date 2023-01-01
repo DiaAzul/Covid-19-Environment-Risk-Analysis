@@ -1,7 +1,11 @@
-name: DASH-ENV
+name: dash
 channels:
+  - conda-forge
   - defaults
 dependencies:
-  - dash=1.4.1=py_0
-  - flake8=3.8.2=py_0
-  - yaml=0.1.7=py_0
+  - python=3.9
+  - dash=1.4.1
+  - plotly=4.7.1
+  - werkzeug=2.0.3
+  - yaml
+prefix: D:\mambaforge\envs\dash
